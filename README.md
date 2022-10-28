@@ -1,3 +1,4 @@
 ## semaforo.c compilation command:
 
-gcc semaforo.c -o semaforo -lpthread
+gcc semaforo/semaforo.c -o bin/semaforo -lpthread
+gcc fcfs/fcfs.c -o bin/fcfs
