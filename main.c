@@ -19,7 +19,10 @@
 
 const int screenWidth = 800;
 const int screenHeight = 500;
-
+int more1 = 1;
+int more2 = 1;
+float yPos = 225.0f;
+float yPos2 = 275.0f;
 
 void update(node_t barcos[]);
 void draw(node_t barcos[]);
@@ -82,6 +85,18 @@ int isInside(struct Barco barco){
 
 
 void update(node_t barcos[]){
+
+	// TEST CODE
+	if(IsKeyDown(KEY_C) && more1 != 0){
+		struct Barco barcoNuevo = {{ 25.0f, yPos },25, 3.5f};
+		push(barcos,barcoNuevo);
+		more1 -= 1;
+	}else if(IsKeyDown(KEY_N) && more2 != 0){
+		struct Barco barcoNuevo = {{ 25.0f, yPos2 },25, 3.5f};
+		push(barcos,barcoNuevo);
+		more2 -= 1;
+	}
+	// TEST CODE
 
     node_t * current = barcos;
 
