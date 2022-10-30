@@ -22,7 +22,7 @@ struct Barco
 	Vector2 position;
 	int size;
 	int speed;
-	int color;
+	//int color;
 };
 void update(struct Barco barcos[]);
 void draw(struct Barco barcos[]);
@@ -41,12 +41,12 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
 
 	struct Barco barcos[3];
-	struct Barco barco1 = {{ 25.0f, 125.0f },25,1.0f};
-	struct Barco barco2 = {{ 25.0f, 75.0f },25,1.5f};
-    //Vector2 barco1 = { 25.0f, 125.0f };
-	//Vector2 barco2 = { 25.0f, 75.0f };
+	struct Barco barco1 = {{ 25.0f, 75.0f }, 25, 1.5f};
+	struct Barco barco2 = {{ 25.0f, 125.0f },25, 2.5f};
+	struct Barco barco3 = {{ 25.0f, 175.0f },25, 3.5f};
 	barcos[0] = barco1;
 	barcos[1] = barco2;
+	barcos[2] = barco3;
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -89,11 +89,16 @@ void update(struct Barco barcos[]){
     if (IsKeyDown(KEY_W))  barcos[0].position.y -= 2.0f;
     if (IsKeyDown(KEY_S))  barcos[0].position.y += 2.0f;
 
-	if (isInside(barcos[1])){
-		barcos[1].position.x += barcos[1].speed;
-	}else{
-		barcos[1].position.x = 25.0f;
+
+	for (int barco = 0; barco < 3; barco++)
+	{		
+		if (isInside(barcos[barco])){
+			barcos[barco].position.x += barcos[barco].speed;
+		}else{
+			barcos[barco].position.x = 25.0f;
+		}
 	}
+	
 }
 
 
@@ -104,8 +109,13 @@ void draw(struct Barco barcos[]){
 
     DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
 
-    DrawCircleV(barcos[0].position, 25, MAGENTA);
-	DrawCircleV(barcos[1].position, 25, MAROON);
+	for (int barco = 0; barco < 3; barco++)
+	{
+		DrawCircleV(barcos[barco].position, 25, MAROON);	
+	}
+	
+    //DrawCircleV(barcos[0].position, 25, MAROON);
+	//DrawCircleV(barcos[1].position, 25, MAROON);
 
     EndDrawing();
 }
