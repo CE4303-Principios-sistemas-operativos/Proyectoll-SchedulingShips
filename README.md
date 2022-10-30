@@ -1,1 +1,3 @@
-sudo apt-get install libncurses5-dev libncursesw5-dev
+For raylib
+
+cc main.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11

@@ -13,6 +13,22 @@
 
 #include "raylib.h"
 
+
+const int screenWidth = 800;
+const int screenHeight = 500;
+
+struct Barco
+{
+	Vector2 position;
+	int size;
+	int speed;
+	int color;
+};
+void update(struct Barco barcos[]);
+void draw(struct Barco barcos[]);
+int isInside(struct Barco barco);
+
+
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -20,12 +36,17 @@ int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
 
-    Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+	struct Barco barcos[3];
+	struct Barco barco1 = {{ 25.0f, 125.0f },25,1.0f};
+	struct Barco barco2 = {{ 25.0f, 75.0f },25,1.5f};
+    //Vector2 barco1 = { 25.0f, 125.0f };
+	//Vector2 barco2 = { 25.0f, 75.0f };
+	barcos[0] = barco1;
+	barcos[1] = barco2;
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -35,23 +56,12 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+		update(barcos);
         //----------------------------------------------------------------------------------
 
         // Draw
         //----------------------------------------------------------------------------------
-        BeginDrawing();
-
-            ClearBackground(RAYWHITE);
-
-            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
-
-            DrawCircleV(ballPosition, 50, MAROON);
-
-        EndDrawing();
+		draw(barcos);
         //----------------------------------------------------------------------------------
     }
 
@@ -61,4 +71,41 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
     return 0;
+}
+
+
+
+int isInside(struct Barco barco){
+	if (barco.position.x < screenWidth){
+		return 1;
+	}
+	return 0;
+}
+
+
+void update(struct Barco barcos[]){
+    if (IsKeyDown(KEY_D))  barcos[0].position.x += 2.0f;
+    if (IsKeyDown(KEY_A))  barcos[0].position.x -= 2.0f;
+    if (IsKeyDown(KEY_W))  barcos[0].position.y -= 2.0f;
+    if (IsKeyDown(KEY_S))  barcos[0].position.y += 2.0f;
+
+	if (isInside(barcos[1])){
+		barcos[1].position.x += barcos[1].speed;
+	}else{
+		barcos[1].position.x = 25.0f;
+	}
+}
+
+
+void draw(struct Barco barcos[]){
+	BeginDrawing();
+
+    ClearBackground(RAYWHITE);
+
+    DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+
+    DrawCircleV(barcos[0].position, 25, MAGENTA);
+	DrawCircleV(barcos[1].position, 25, MAROON);
+
+    EndDrawing();
 }

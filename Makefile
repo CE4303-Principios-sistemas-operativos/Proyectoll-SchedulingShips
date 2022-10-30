@@ -1,2 +1,2 @@
-linked_list: linked_list.c main.c
-	gcc -o linked_list_ex linked_list.c main.c
+barcos: main.c
+	gcc main.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o main
