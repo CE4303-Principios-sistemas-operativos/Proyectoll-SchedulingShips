@@ -3,29 +3,29 @@
 
 
 
-#include "../lib/CE.h"
+#include "../lib/CEThread.h"
 
 
 /**
- * This struct represents a generic alien.
+ * This struct represents a generic ship.
  * 
  * short position[2] - starting position.
- * float speed - alien speed.
+ * float speed - ship speed.
  *     - Normal:    x.
- *     - A-Alien:   1.2x.
- *     - B-Alien:   1.5x to 2x.
- *     - I-Alien:   2x.
+ *     - A-ship:   1.2x.
+ *     - B-ship:   1.5x to 2x.
+ *     - I-ship:   2x.
  * short priority - priority to cross the bridge.
  *     - Normal:    2
- *     - A-Alien:   2
- *     - B-Alien:   1
- *     - I-Alien:   0
+ *     - A-ship:   2
+ *     - B-ship:   1
+ *     - I-ship:   0
  * float execution_time - since creation to destruction.
- * short type - alien type.
+ * short type - ship type.
  *     - Normal:    0
- *     - A-Alien:   1
- *     - B-Alien:   2
- *     - I-Alien:   3
+ *     - A-ship:   1
+ *     - B-ship:   2
+ *     - I-ship:   3
  * short status
  *     - creation:  0
  *     - running:   1
@@ -34,16 +34,16 @@
  *     - locked:    4
  *     - dead:      5
  *     - free:      6
- * float weight - alien weight.
- * short direction - alien direction.
+ * float weight - ship weight.
+ * short direction - ship direction.
  *     - up:    0
  *     - down:  1
  *     - left:  2
  *     - right: 3
  * short ticks - indicates how many ticks have passed since creation.
- * short origin - indicates if the alien is from A or B community.
+ * short origin - indicates if the ship is from A or B community.
  */
-struct alien {
+struct Ship {
     // (x, y)
     short position[2];
     float speed;
@@ -55,21 +55,21 @@ struct alien {
     short direction;
     short ticks;
     short community;
-} typedef Alien;
+} typedef Ship;
 
 /**
- * Struct used to represent an Alien Data.
+ * Struct used to represent an ship Data.
  * 
- * float speed - alien speed.
+ * float speed - ship speed.
  * float execution_time - since creation to destruction.
- * float weight - alien weight.
+ * float weight - ship weight.
  * 
  */
-struct alien_data {
+struct ship_data {
     float speed;
     float execution_time;
     int weight;
-} typedef AlienData;
+} typedef shipData;
 
 enum cardinals
 {
@@ -93,12 +93,12 @@ enum schedulers
  * float current_weight - current weight on the bridge.
  * float max_weight - max weight supported by the bridge.
  * int length
- * Alien* south_aliens - array of alien in the south.
- * Alien* north_aliens - array of aliens in the north.
- * int south_aliens_number - current number of alien in the south.
- * int north_aliens_number - current number of aliens in the north.
- * int max_south_aliens - max number of alien in the south.
- * int max_north_aliens - max number of aliens in the north
+ * ship* south_ships - array of ship in the south.
+ * ship* north_ships - array of ships in the north.
+ * int south_ships_number - current number of ship in the south.
+ * int north_ships_number - current number of ships in the north.
+ * int max_south_ships - max number of ship in the south.
+ * int max_north_ships - max number of ships in the north
  * void* algorithm - calendarization algorithm.
  * void* calendar - calendar type.
  * short direction - current bridge direction.
@@ -113,14 +113,14 @@ struct bridge {
     int current_weight;
     int max_weight;
     int length;
-    Alien* south_aliens;
+    ship* south_ships;
     lpthread_mutex_t* south_mutex;
-    Alien* north_aliens;
+    ship* north_ships;
     lpthread_mutex_t* north_mutex;
-    int south_aliens_number;
-    int north_aliens_number;
-    int max_south_aliens;
-    int max_north_aliens;
+    int south_ships_number;
+    int north_ships_number;
+    int max_south_ships;
+    int max_north_ships;
     enum schedulers calendar;
     short direction;
     int y;
@@ -132,8 +132,8 @@ struct bridge {
  * Struct to represent a Bridge Data.
  * 
  * float max_weight - max weight supported by the bridge.
- * int max_south_aliens - max number of alien in the south.
- * int max_north_aliens - max number of aliens in the north.
+ * int max_south_ships - max number of ship in the south.
+ * int max_north_ships - max number of ships in the north.
  * char* algorithm - name of the calendarization algorithm.
  * char* calendar - calendar type name.
  * 
@@ -141,38 +141,38 @@ struct bridge {
 struct bridge_data {
     int length;
     int max_weight;
-    int max_south_aliens;
-    int max_north_aliens;
+    int max_south_ships;
+    int max_north_ships;
     char* algorithm;
     enum schedulers calendar;
 } typedef BridgeData;
 
 /**
- * Struct to represen a Alien Spawner.
+ * Struct to represen a ship Spawner.
  *
  * float mean - distribution mean.
- * float alpha - percentage of alpha aliens.
- * float beta - percentage of beta aliens.
- * float normal - percentage of normal aliens.
+ * float alpha - percentage of alpha ships.
+ * float beta - percentage of beta ships.
+ * float normal - percentage of normal ships.
  * short mode - execution order.
  *      - automatic: 1.
  *      - manual:    0.
- * AlienData* alien_data: loaded alien settings.
+ * shipData* ship_data: loaded ship settings.
  * 
  */
-struct alien_spawner {
+struct ship_spawner {
     float mean;
     float alpha;
     float beta;
     float normal;
     short mode;
-    AlienData* alien_data;
-} typedef AlienSpawner;
+    shipData* ship_data;
+} typedef shipSpawner;
 
-struct thread_args_alien {
-    Alien* alien;
+struct thread_args_ship {
+    ship* ship;
     int pos;
-} typedef thread_args_alien_t;
+} typedef thread_args_ship_t;
 
 
 #endif /* PROJECT2_SHARED_STRUCTS_H */
