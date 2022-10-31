@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Barco.h"
-#include "linkedList.h"
+#include "../header/Barco.h"
+#include "../header/linkedList.h"
 
 
 node_t * new_list(struct Barco barco){
@@ -42,7 +42,6 @@ void push(node_t * head, struct Barco barco) {
 struct Barco get_n_item(node_t * head, int n) {
     node_t * current = head;
     int count = 0;    
-    printf("Current list\n");
     while (current != NULL) {
         if (count == n){
             return current->barco;
@@ -74,5 +73,4 @@ struct Barco remove_last(node_t * head) {
     free(current->next);
     current->next = NULL;
     return retval;
-
 }

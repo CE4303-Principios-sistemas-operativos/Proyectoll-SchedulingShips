@@ -1,2 +1,2 @@
-barcos: main.c linkedList.c Barco.c Window.c
-	gcc main.c linkedList.c Barco.c Window.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o bin/main
+barcos: main.c src/linkedList.c src/Barco.c src/Window.c
+	gcc main.c src/linkedList.c src/Barco.c src/Window.c -lraylib -lGL -lm -ldl -lrt -lX11 -o bin/main

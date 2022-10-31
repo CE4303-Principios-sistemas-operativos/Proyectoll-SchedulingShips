@@ -8,7 +8,8 @@ struct Barco
 	Vector2 position;
 	int size;
 	int speed;
-	//int color;
+	char dock;
+	int stage;
 };
 
 
