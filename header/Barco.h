@@ -10,6 +10,9 @@ struct Barco
 	int speed;
 	char dock;
 	int stage;
+	Texture2D texture;
+	Texture2D textureE;
+	Texture2D textureO;
 };
 
 
