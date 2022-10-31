@@ -11,6 +11,7 @@ int userMenu(){
     printf("1 ----> Add node\n");
     printf("2 ----> Remove last node\n");
     printf("3 ----> Exit\n");
+    printf("4 ----> Get n node\n");
     printf("-------Menu---------\n");
 
     printf("Option > ");
@@ -40,6 +41,12 @@ int main(){
         }else if(userOption == 2){
             remove_last(head);
 
+        }else if (userOption == 4){
+            printf("-- Pos >");
+            scanf("%d",&value);
+            value = get_n_item(head, value);
+            printf("\nReturned value: %d\n", value);
+        
         }else{
 
             userOption = 3;

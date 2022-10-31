@@ -26,6 +26,23 @@ void print_list(node_t * head) {
 }
 
 
+int get_n_item(node_t * head, int n) {
+    node_t * current = head;
+    int count = 0;    
+    printf("Current list\n");
+    while (current != NULL) {
+        if (count == n){
+            return current->val;
+        }
+        count++;
+        current = current->next;
+    }
+}
+
+
+
+
+
 void push(node_t * head, int val) {
     node_t * current = head;
     while (current->next != NULL) {
