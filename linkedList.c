@@ -39,6 +39,21 @@ void push(node_t * head, struct Barco barco) {
 }
 
 
+struct Barco get_n_item(node_t * head, int n) {
+    node_t * current = head;
+    int count = 0;    
+    printf("Current list\n");
+    while (current != NULL) {
+        if (count == n){
+            return current->barco;
+        }
+        count++;
+        current = current->next;
+    }
+}
+
+
+
 struct Barco remove_last(node_t * head) {
     struct Barco retval;
     /* if there is only one item in the list, remove it */
