@@ -12,21 +12,21 @@
 ********************************************************************************************/
 
 #include "raylib.h"
-#include "types.h"
-#include "linked_list.h"
+#include "Barco.h"
+#include "Window.h"
+#include "linkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-const int screenWidth = 800;
-const int screenHeight = 500;
-int more1 = 1;
-int more2 = 1;
-float yPos = 225.0f;
-float yPos2 = 275.0f;
 
+struct Window window = {800,500};
+
+
+float base = 225.0f;
 void update(node_t barcos[]);
 void draw(node_t barcos[]);
-int isInside(struct Barco barco);
+
+
 
 
 //------------------------------------------------------------------------------------
@@ -38,16 +38,16 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
+    InitWindow(window.screenWidth,window.screenHeight, "raylib [core] example - keyboard input");
 	
 	struct Barco barco1 = {{ 25.0f, 75.0f }, 25, 1.5f};
 	struct Barco barco2 = {{ 25.0f, 125.0f },25, 2.5f};
 	struct Barco barco3 = {{ 25.0f, 175.0f },25, 3.5f};
 	
-	node_t * head = new_list(barco1);
-	push(head, barco2);
-	push(head, barco3);
-	//print_list(head);
+	node_t * barcos = new_list(barco1);
+	push(barcos, barco2);
+	push(barcos, barco3);
+	//print_list(barcos);
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -57,12 +57,12 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-		update(head);
+		update(barcos);
         //----------------------------------------------------------------------------------
 
         // Draw
         //----------------------------------------------------------------------------------
-		draw(head);
+		draw(barcos);
         //----------------------------------------------------------------------------------
     }
 
@@ -76,32 +76,20 @@ int main(void)
 
 
 
-int isInside(struct Barco barco){
-	if (barco.position.x < screenWidth){
-		return 1;
-	}
-	return 0;
-}
-
-
 void update(node_t barcos[]){
 
 	// TEST CODE
-	if(IsKeyDown(KEY_C) && more1 != 0){
-		struct Barco barcoNuevo = {{ 25.0f, yPos },25, 3.5f};
+	if(IsKeyPressed(KEY_ENTER)){
+		struct Barco barcoNuevo = {{ 25.0f, base },25, 3.5f};
 		push(barcos,barcoNuevo);
-		more1 -= 1;
-	}else if(IsKeyDown(KEY_N) && more2 != 0){
-		struct Barco barcoNuevo = {{ 25.0f, yPos2 },25, 3.5f};
-		push(barcos,barcoNuevo);
-		more2 -= 1;
+        base += 50;
 	}
 	// TEST CODE
 
     node_t * current = barcos;
 
     while (current != NULL) {
-		if (isInside(current->barco)){
+		if (isInside(current->barco, window)){
 			current->barco.position.x += current->barco.speed;
 		}else{
 			current->barco.position.x = 25.0f;
@@ -116,7 +104,7 @@ void draw(node_t barcos[]){
 
     ClearBackground(RAYWHITE);
 
-    DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+    //DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
 
     node_t * current = barcos;
 

@@ -11,5 +11,7 @@ struct Barco
 	//int color;
 };
 
-#endif /* _MY_HEADER_H_ */
+
+
+#endif /* _MY_HEADER_BARCO_ */
 

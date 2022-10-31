@@ -1,7 +1,7 @@
 #ifndef _MY_HEADER_H_
 #define _MY_HEADER_H_
 
-#include "types.h"
+#include "Barco.h"
 
 typedef struct node {
     struct Barco barco;

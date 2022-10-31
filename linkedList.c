@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "types.h"
-#include "linked_list.h"
+#include "Barco.h"
+#include "linkedList.h"
 
 
 node_t * new_list(struct Barco barco){
