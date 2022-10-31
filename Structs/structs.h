@@ -1,4 +1,4 @@
-#include <pthread.h>
+#include "../CEThreads/CEthread.h"
 
 
 #define numberOfBoats 3
@@ -11,7 +11,7 @@ struct boat
     int speed;
     int priority;
     int started;
-    pthread_t thread;
+    CEthread_t* thread;
 };
 
 struct boatFleet
