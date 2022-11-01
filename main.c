@@ -65,7 +65,7 @@ int main(void)
 
 
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    //SetTargetFPS(60);           // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -81,6 +81,8 @@ int main(void)
 		draw(barcos, window, canal);
         //----------------------------------------------------------------------------------
     }
+    int  ho;
+    //scanf("%d", ho);
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
