@@ -1,2 +1,2 @@
-files: main.c iohandling.c
-	gcc main.c iohandling.c -o bin/main
+files: main.c
+	gcc main.c -o bin/main

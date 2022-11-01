@@ -1,3 +1,4 @@
+// C program to implement
 // the above approach
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,10 +8,8 @@
 int main()
 {
     FILE* ptr;
-    char ch;
- 
-    // Opening file in reading mode
-    ptr = fopen("test.txt", "r");
+    char str[50];
+    ptr = fopen("test.txt", "a+");
  
     if (NULL == ptr) {
         printf("file can't be opened \n");
@@ -18,17 +17,29 @@ int main()
  
     printf("content of this file are \n");
  
-    // Printing what is written in file
-    // character by character using loop.
-    do {
-        ch = fgetc(ptr);
-        printf("%c", ch);
+    while (fgets(str, 50, ptr) != NULL) {
+        printf("%s", str);
+    }
  
-        // Checking if character is not EOF.
-        // If it is EOF stop eading.
-    } while (ch != EOF);
- 
-    // Closing the file
     fclose(ptr);
+
+
+    splitLine(str);
+
     return 0;
+}
+
+
+void splitLine(char strPar[]){
+	char str[] = "strtok needs to be called several times to split a string";
+	int init_size = strlen(str);
+	char delim[] = "ai";
+
+	char *ptr = strtok(str, delim);
+
+	while (ptr != NULL)
+	{
+		printf("'%s'\n", ptr);
+		ptr = strtok(NULL, delim);
+	}
 }
